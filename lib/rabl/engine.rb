@@ -286,7 +286,7 @@ module Rabl
       _cache = @_cache if defined?(@_cache)
       cache_key, cache_options = *_cache || nil
       if template_cache_configured? && cache_key
-        if Rails.version =~ /^[4]/ && !cache_options[:skip_digest]
+        if Rails.version =~ /^[4]/ && (!cache_options.nil? && !cache_options[:skip_digest])
           result_cache_key = cache_key_with_digest(cache_key)
         else # fallback for Rails 3
           result_cache_key = cache_key_simple(cache_key)
